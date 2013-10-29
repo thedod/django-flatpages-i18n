@@ -8,7 +8,6 @@ from django.views.decorators.csrf import csrf_protect
 
 from flatpages_i18n.models import FlatPage_i18n
 
-
 DEFAULT_TEMPLATE = 'flatpages_i18n/default.html'
 
 
@@ -31,7 +30,6 @@ def flatpage(request, url):
         flatpage
             `flatpages.flatpages` object
     """
-
     if not url.startswith('/'):
         url = '/' + url
 
@@ -42,8 +40,8 @@ def flatpage(request, url):
         url = url[len(language_prefix):]
 
     kwargs = {
-        '{0}__{1}'.format('url_%s' % language, 'exact'): url,
-        '{0}__{1}'.format('sites__id', 'exact'): settings.SITE_ID
+        'url__exact': url,
+        'sites__id__exact': settings.SITE_ID
     }
 
     try:
